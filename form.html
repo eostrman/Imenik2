@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imenik - Kontakt</title>
+    <link rel="stylesheet" href="Styles/style.css">
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="list.html" class="back-link">← Natrag na listu</a>
+        <div class="title" id="formTitle">Novi kontakt</div>
+        
+        <div class="content">
+            <form id="contactForm">
+                <div class="user-details">
+                    <!-- Ime -->
+                    <div class="input-box">
+                        <span class="details">Ime</span>
+                        <input type="text" id="ime" placeholder="Unesite ime" required>
+                        <div class="error-message" id="imeError">Ime je obavezno polje</div>
+                    </div>
+                    
+                    <!-- Prezime -->
+                    <div class="input-box">
+                        <span class="details">Prezime</span>
+                        <input type="text" id="prezime" placeholder="Unesite prezime" required>
+                        <div class="error-message" id="prezimeError">Prezime je obavezno polje</div>
+                    </div>
+                    
+                    <!-- Datum rođenja -->
+                    <div class="input-box-date">
+                        <span class="details">Datum rođenja</span>
+                        <input type="date" id="datumRodenja" required>
+                        <div class="error-message" id="datumError">Datum rođenja je obavezan i ne može biti u budućnosti</div>
+                    </div>
+                    
+                    <!-- Ulica i kućni broj -->
+                    <div class="input-box">
+                        <span class="details">Ulica i kućni broj</span>
+                        <input type="text" id="adresa" placeholder="Unesite adresu" required>
+                        <div class="error-message" id="adresaError">Adresa je obavezno polje</div>
+                    </div>
+                    
+                    <!-- Poštanski broj -->
+                    <div class="input-box">
+                        <span class="details">Poštanski broj</span>
+                        <input type="text" id="postanskiBroj" placeholder="Npr. 10000" maxlength="5" required>
+                        <div class="error-message" id="postanskiError">Poštanski broj mora sadržavati samo brojke (max 5)</div>
+                    </div>
+                    
+                    <!-- Telefon -->
+                    <div class="input-box">
+                        <span class="details">Broj telefona</span>
+                        <div class="phone-group">
+                            <select id="telefonPrefiks" class="phone-prefix">
+                                <option value="091">091</option>
+                                <option value="092">092</option>
+                                <option value="095">095</option>
+                                <option value="097">097</option>
+                                <option value="098">098</option>
+                                <option value="099">099</option>
+                            </select>
+                            <input type="text" id="telefonBroj" class="phone-number" placeholder="1234567" maxlength="7" required>
+                        </div>
+                        <div class="error-message" id="telefonError">Broj telefona mora sadržavati samo brojke (max 7)</div>
+                    </div>
+                </div>
+                <!-- Gumbi -->
+                <div class="button-group" id="buttonGroup">
+                    <button type="button" class="btn btn-save" id="btnSpremi" onclick="spremiKontakt()">Spremi</button>
+                    <button type="button" class="btn btn-cancel" id="btnOdustani" onclick="odustani()">Odustani</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    
+    <!-- Toast obavijest -->
+    <div class="toast" id="toast"></div>
+    
+    <script src="Scripts/form.js"></script>
+</body>
+</html>

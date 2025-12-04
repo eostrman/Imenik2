@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imenik - Lista kontakata</title>
+    <link rel="stylesheet" href="Styles/style.css">    
+</head>
+<body>
+    <div class="container">
+        <div class="header-section">
+            <a href="index.html" class="back-link">← Početna</a>
+            <a href="form.html?mode=create" class="btn-new">+ Novi kontakt</a>
+        </div>
+        
+        <div class="title">Lista kontakata</div>
+        
+        <div class="table-container">
+            <table id="contactsTable">
+                <thead>
+                    <tr>
+                        <th>Ime</th>
+                        <th>Prezime</th>
+                        <th>Datum rođenja</th>
+                        <th>Telefon</th>
+                        <th>Akcije</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Kontakti će biti dodani ovdje -->
+                </tbody>
+            </table>
+            
+            <div class="empty-message" id="emptyMessage" style="display: none;">
+                Nema spremljenih kontakata.<br>
+                Kliknite "Novi kontakt" za dodavanje.
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal za potvrdu brisanja -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal">
+            <h3>Potvrda brisanja</h3>
+            <p>Jeste li sigurni da želite obrisati ovaj kontakt?</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-confirm" onclick="potvrdiObrisi()">Obriši</button>
+                <button class="modal-btn modal-btn-cancel" onclick="zatvoriModal()">Odustani</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast obavijest -->
+    <div class="toast" id="toast"></div>
+    
+    <script src="Scripts/list.js"></script>
+</body>
+</html>
