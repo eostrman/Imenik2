@@ -52,7 +52,9 @@ function spremiKontakt () {
 
     const kontaktiString = localStorage.getItem('kontakti');
     let kontakti = kontaktiString ? JSON.parse(kontaktiString) : [];
-    
+
+
+    //iteriraj kroz kontake dok ne nađeš kontakt koji ima id jednak trenutačnom tj. onom koji editiraš
     if (trenutniMode === 'edit') {
         for (var i = 0; i < kontakti.length; i++) {
             if (kontakti[i].id === trenutniId) {
@@ -73,6 +75,7 @@ function spremiKontakt () {
     }, 500);
 }
 
+//ovo je ispravan način generiranja UUID-a
 const generirajId = () => crypto.randomUUID();
 
 function odustani() {
