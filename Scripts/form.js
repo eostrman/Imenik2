@@ -1,12 +1,16 @@
 let trenutniMode = 'create';
 let trenutniId = null;
 
+//Na Page load
 document.addEventListener('DOMContentLoaded', function() {   
-    // Dohvati parametre iz URL-a
     const urlParams = new URLSearchParams(window.location.search);
     trenutniMode = urlParams.get('mode') || 'create';
     trenutniId = urlParams.get('id');
     
+    //ograničim max datum na današnji
+    const danas = new Date().toISOString().split('T')[0];
+    document.querySelector('#datumRodenja').setAttribute('max', danas);
+
     postaviFormu();
 });
 
@@ -15,18 +19,15 @@ function postaviFormu() {
     const buttonGroup = document.querySelector('#buttonGroup');
     
     if (trenutniMode === 'create') {
-        //Kreiraj novi kontakt
         naslov.textContent = 'Novi kontakt';
         buttonGroup.style.display = 'flex';
         
     } else if (trenutniMode === 'edit') {
-        //Uredi kontakt
         naslov.textContent = 'Uredi kontakt';
         buttonGroup.style.display = 'flex';
         ucitajKontakt(trenutniId);
         
     } else if (trenutniMode === 'view') {
-        // Pregledaj kontakt
         naslov.textContent = 'Pregled kontakta';
         buttonGroup.style.display = 'none';
         ucitajKontakt(trenutniId);
@@ -56,7 +57,7 @@ function spremiKontakt () {
 
     //iteriraj kroz kontake dok ne nađeš kontakt koji ima id jednak trenutačnom tj. onom koji editiraš
     if (trenutniMode === 'edit') {
-        for (var i = 0; i < kontakti.length; i++) {
+        for (let i = 0; i < kontakti.length; i++) {
             if (kontakti[i].id === trenutniId) {
                 kontakti[i] = kontakt;
                 break;
@@ -79,14 +80,13 @@ function spremiKontakt () {
 const generirajId = () => crypto.randomUUID();
 
 function odustani() {
-
     setTimeout(function() {
         window.location.href = 'list.html';        
     }, 500);
 }
 
 function prikaziToast(poruka, tip) {
-    var toast = document.getElementById('toast');
+    const toast = document.getElementById('toast');
     toast.textContent = poruka;
     toast.className = 'toast';
     

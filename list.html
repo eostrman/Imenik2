@@ -30,6 +30,22 @@
                     <!-- Kontakti će biti dodani ovdje -->
                 </tbody>
             </table>
+            <!-- ovo je prije bilo u list.js -->
+            <template id="contactRowTemplate">
+                <tr>
+                    <td class="ime"></td>
+                    <td class="prezime"></td>
+                    <td class="datum"></td>
+                    <td class="telefon"></td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn-action btn-view">Pregledaj</button>
+                            <button class="btn-action btn-edit">Uredi</button>
+                            <button class="btn-action btn-delete">Obriši</button>
+                        </div>
+                    </td>
+                </tr>
+            </template>
             
             <div class="empty-message" id="emptyMessage" style="display: none;">
                 Nema spremljenih kontakata.<br>
