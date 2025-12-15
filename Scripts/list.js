@@ -37,6 +37,7 @@ function prikaziKontakte() {
         row.querySelector('.prezime').textContent = kontakt.prezime;
         row.querySelector('.datum').textContent = datumFormatiran;
         row.querySelector('.telefon').textContent = telefon;
+        row.querySelector('.email').textContent = kontakt.email;
 
         row.querySelector('.btn-view').onclick = () => pregledajKontakt(kontakt.id);
         row.querySelector('.btn-edit').onclick = () => urediKontakt(kontakt.id);
