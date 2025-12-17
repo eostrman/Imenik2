@@ -66,7 +66,6 @@ function postaviFormu() {
         buttonGroup.style.display = 'none';
         ucitajKontakt(trenutniId);
         onemoguciPolja();
-        onemoguciPolja();
     }
 }
 
@@ -91,8 +90,6 @@ function spremiKontakt () {
         adresa: getValue('adresa').trim(),
         postanskiBroj: getValue('postanskiBroj').trim(),
         telefonPrefiks: getValue('telefonPrefiks'),
-        telefonBroj: getValue('telefonBroj').trim(),
-        email: getValue('email').trim()
         telefonBroj: getValue('telefonBroj').trim(),
         email: getValue('email').trim()
     };   
