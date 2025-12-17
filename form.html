@@ -66,18 +66,32 @@
                         </div>
                         <div class="error-message" id="telefonError">Broj telefona mora sadržavati samo brojke (max 7)</div>
                     </div>
+
+                    <div class="input-box" placeholder="e-mail">
+                        <span class="details">E-mail</span>
+                        <input type="email" id="email" placeholder="e-mail">
+                        <div class="error-message" id="emailError">Upiši ispravno e-mail!</div>
+                    </div>
                 </div>
                 <!-- Gumbi -->
-                <div class="button-group" id="buttonGroup">
-                    <button type="button" class="btn btn-save" id="btnSpremi" onclick="spremiKontakt()">Spremi</button>
-                    <button type="button" class="btn btn-cancel" id="btnOdustani" onclick="odustani()">Odustani</button>
+                 <div class="modal-overlay" id="odustaniModal">
+                    <div class="modal">
+                        <h3>Potvrda odustajanja</h3>
+                        <p>Jeste li sigurni da želite odustati?</p>
+                            <div class="modal-buttons">
+                                <button type="button" class="modal-btn modal-btn-confirm" onclick="potvrdiOdustani()">Da</button>
+                                <button type="button" class="modal-btn modal-btn-cancel" onclick="zatvoriModal()">Ne</button>
+                            </div>
+                    </div>                    
+                </div>
+                    <div class="button-group" id="buttonGroup">
+                        <button type="button" class="btn btn-save" id="btnSpremi" onclick="spremiKontakt()">Spremi</button>
+                        <button type="button" class="btn btn-cancel" id="btnOdustani" onclick="odustani()" disabled>Odustani</button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
-
-    
-    
     <!-- Toast obavijest -->
     <div class="toast" id="toast"></div>
     

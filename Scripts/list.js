@@ -1,3 +1,5 @@
+kontaktZaBrisanje = null;
+
 // Na Page load-u
 document.addEventListener('DOMContentLoaded', function() {
     prikaziKontakte();
@@ -20,6 +22,7 @@ function prikaziKontakte() {
         return;
     }
     
+    table.style.display = 'table';
     emptyMessage.style.display = 'none';
     
     // iteriraj pa dodaj u tablicu
@@ -29,26 +32,30 @@ function prikaziKontakte() {
         
         const datumFormatiran = formatirajDatum(kontakt.datumRodenja);        
         
-        const telefon = kontakt.telefonPrefiks + ' ' + kontakt.telefonBroj;
+        const telefon = kontakt.telefonPrefiks + kontakt.telefonBroj;
+        const formatiraniTelefonBroj = formatTelefonBroj(telefon);
         
         row = template.content.cloneNode(true);
 
         row.querySelector('.ime').textContent = kontakt.ime;
         row.querySelector('.prezime').textContent = kontakt.prezime;
         row.querySelector('.datum').textContent = datumFormatiran;
-        row.querySelector('.telefon').textContent = telefon;
-
+        row.querySelector('.telefon').textContent = formatiraniTelefonBroj;
+        row.querySelector('.email').textContent = kontakt.email;
+        
         row.querySelector('.btn-view').onclick = () => pregledajKontakt(kontakt.id);
         row.querySelector('.btn-edit').onclick = () => urediKontakt(kontakt.id);
         row.querySelector('.btn-delete').onclick = () => obrisiKontakt(kontakt.id);
-        
+
         tableBody.appendChild(row);
     }
 }
 
-// Format datuma iz YYYY-MM-DD u DD.MM.YYYY - nažalost formatiranje mora ić jer datepicker prikazuje u HR culture ali u backgroundu radi u ISO modu tj. YYYY-MM-DD
-//mislio sam ga prevarit pa prije spremanja kontakta napravit format u naš ali onda na editu opet moram pretvarat u ISO tak da si dupliciram posao
-//vidjet ću kad dođem do validacije hoće li bit dorada
+function formatTelefonBroj (broj) {
+    const brojFormatiran = broj.substring(0,3) + "\\" + broj.substring(3,6) + '-' + broj.substring(6);
+    return brojFormatiran;
+}
+
 function formatirajDatum(datum) {
     if (!datum) 
         {
@@ -60,21 +67,69 @@ function formatirajDatum(datum) {
     return dijelovi[2] + '.' + dijelovi[1] + '.' + dijelovi[0] + '.';
 }
 
-// Funkcija za pregled kontakta
-    // TODO
+function pregledajKontakt (id) {
+    window.location.href = 'form.html?mode=view&id=' + id;
+}
 
-// Funkcija za uređivanje kontakta
-    // TODO
+function urediKontakt (id) {
+    window.location.href = 'form.html?mode=edit&id=' + id;
+}
 
-// Funkcija za brisanje kontakta (otvara modal)
-    // TODO
+function obrisiKontakt (id) {
+    kontaktZaBrisanje = id;
+    ///mogu dohvatiti po ID selectoru
+    document.querySelector('#deleteModal').style.display = 'flex';
+}
 
-// Funkcija za zatvaranje modala
-    // TODO
+function zatvoriModal () {
+    kontaktZaBrisanje = null;
+    //ili mogu dohvatiti po class selectoru
+    document.querySelector('.modal-overlay').style.display = 'none';
+}
 
-// Funkcija za potvrdu brisanja
-    // TODO
+function potvrdiObrisi() {
+    if (!kontaktZaBrisanje) {
+        return;
+    }
 
-// Funkcija za prikaz toast obavijesti
-    // TODO
+    const kontaktiString = localStorage.getItem('kontakti');
+    const kontakti = kontaktiString ? JSON.parse(kontaktiString) : [];
+
+    const noviKontakt = [];
+    for (let i = 0; i < kontakti.length; i++) {
+        if (kontakti[i].id !== kontaktZaBrisanje) {
+            //push je ko u C# .Add kad dodajemo u niz/listu. Javascript nema array i list nego je array ko list u C#
+            noviKontakt.push(kontakti[i]);
+        }
+    }
+
+    //sad si update-aj kontakte
+    localStorage.setItem('kontakti', JSON.stringify(noviKontakt));
+
+    zatvoriModal();
+
+    prikaziToast('Kontakt je obrisan', 'success');
+
+    //refrešhaj listu
+    prikaziKontakte();
+}
+
+function prikaziToast(poruka, tip) {
+    const toast = document.getElementById('toast');
+    toast.textContent = poruka;
+    toast.className = 'toast';
+    
+    if (tip === 'success') {
+        toast.classList.add('toast-success');
+    } else {
+        toast.classList.add('toast-error');
+    }
+    
+    toast.style.display = 'block';
+    
+    // Sakrij toast nakon 3 sekunde
+    setTimeout(function() {
+        toast.style.display = 'none';
+    }, 3000);
+}
 

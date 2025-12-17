@@ -23,6 +23,7 @@
                         <th>Prezime</th>
                         <th>Datum rođenja</th>
                         <th>Telefon</th>
+                        <th>Email</th>
                         <th>Akcije</th>
                     </tr>
                 </thead>
@@ -37,6 +38,7 @@
                     <td class="prezime"></td>
                     <td class="datum"></td>
                     <td class="telefon"></td>
+                    <td class="email"></td>
                     <td>
                         <div class="action-buttons">
                             <button class="btn-action btn-view">Pregledaj</button>
@@ -60,8 +62,8 @@
             <h3>Potvrda brisanja</h3>
             <p>Jeste li sigurni da želite obrisati ovaj kontakt?</p>
             <div class="modal-buttons">
-                <button class="modal-btn modal-btn-confirm" onclick="potvrdiObrisi()">Obriši</button>
-                <button class="modal-btn modal-btn-cancel" onclick="zatvoriModal()">Odustani</button>
+                <button type="button" class="modal-btn modal-btn-confirm" onclick="potvrdiObrisi()">Obriši</button>
+                <button type="button" class="modal-btn modal-btn-cancel" onclick="zatvoriModal()">Odustani</button>
             </div>
         </div>
     </div>
